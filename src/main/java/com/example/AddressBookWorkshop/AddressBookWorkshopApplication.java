@@ -29,5 +29,12 @@ public class AddressBookWorkshopApplication {
 //		# Delete contact
 //curl -X DELETE http://localhost:8080/api/addressbook/1
 
+//# Register a new user
+//curl -X POST http://localhost:8080/api/auth/register -H "Content-Type: application/json" -d '{"username": "JohnDoe", "email": "john@example.com", "password": "password123"}'
+//
+//		# Login to get JWT Token
+//curl -X POST http://localhost:8080/api/auth/login -H "Content-Type: application/json" -d '{"email": "john@example.com", "password": "password123"}'
+
+
 
 
