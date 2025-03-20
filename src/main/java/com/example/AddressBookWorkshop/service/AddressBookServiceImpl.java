@@ -1,18 +1,15 @@
 package com.example.AddressBookWorkshop.service;
-
 import com.example.AddressBookWorkshop.dto.AddressBookDTO;
-import com.example.AddressBookWorkshop.interfaces.AddressBookService;
+import com.example.AddressBookWorkshop.interfaces.IAddressBookService;
 import com.example.AddressBookWorkshop.model.AddressBookEntry;
 import com.example.AddressBookWorkshop.repository.AddressBookRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class AddressBookServiceImpl implements AddressBookService {
+public class AddressBookServiceImpl implements IAddressBookService {
 
     @Autowired
     private AddressBookRepository repository;
@@ -38,21 +35,14 @@ public class AddressBookServiceImpl implements AddressBookService {
 
     @Override
     public AddressBookEntry updateContact(Long id, AddressBookDTO dto) {
-        Optional<AddressBookEntry> existing = repository.findById(id);
-        if (existing.isPresent()) {
-            AddressBookEntry entry = existing.get();
-            modelMapper.map(dto, entry);
-            return repository.save(entry);
-        } else {
-            throw new RuntimeException("Contact not found");
-        }
+        AddressBookEntry existing = getContactById(id);
+        modelMapper.map(dto, existing);
+        return repository.save(existing);
     }
 
     @Override
     public void deleteContact(Long id) {
-        if (!repository.existsById(id)) {
-            throw new RuntimeException("Contact not found");
-        }
+        if (!repository.existsById(id)) throw new RuntimeException("Contact not found");
         repository.deleteById(id);
     }
 }

@@ -2,10 +2,9 @@ package com.example.AddressBookWorkshop.interfaces;
 
 import com.example.AddressBookWorkshop.dto.AddressBookDTO;
 import com.example.AddressBookWorkshop.model.AddressBookEntry;
-
 import java.util.List;
 
-public interface AddressBookService {
+public interface IAddressBookService {
     List<AddressBookEntry> getAllContacts();
     AddressBookEntry getContactById(Long id);
     AddressBookEntry addContact(AddressBookDTO dto);
